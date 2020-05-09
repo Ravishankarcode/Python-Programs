@@ -1,0 +1,212 @@
+Indentation -- means extra space in code
+=========================================
+for install a package in Anaconda CMD
+=========================================
+conda install packagename
+       or
+pip install packagename
+
+==========================================
+         Converting List to Array
+==========================================
+list =[34,64,23,65]
+import numpy as np
+arr = np.array(list)
+
+==========================================
+     Array value through function
+==========================================
+import numpy as np
+mydata = np.arange(0,20)
+
+==========================================
+        $$Convert into matrix$$
+==========================================
+mydata.reshape(5,4)
+        or
+np.reshape(mydata,(5,4))
+ -- means 5 rows and 4 columns
+        or
+np.reshape(mydata,(5,4), order = 'C')
+
+np.reshape(mydata,(5,4), order = 'F')
+ print in different way 
+
+=========================================
+         $$Ignore Warning$$
+=========================================
+import warnings
+warnings.filterwarnings('ignore')
+=========================================
+            $$Round Value$$
+=========================================
+np.matrix.round(values)
+=========================================
+   $$Plot a Diagramm of any data$$
+=========================================
+Ppyplot as plt;
+%matplotlib inline
+plt.plot(Salary[0])
+
+plt.plot(Salary[0], c='Black', ls='---', marker='s')
+  *c = color, *ls = line Style
+-> for zooming the Diagram screen
+plt.reParams['figure.figsize'] = 8,4
+-> for specify text on x axis
+plt.xticks(list(range(0,10)),Seasons,rotation='vertical')
+-> For details about graph
+plt.legend(loc='upper left',bbox_to_anchor=(1,1))
+===========================================
+ Create own Function
+==========================================
+Function Definition:
+------------------------
+def myplot(playerlist):
+  for name in playerlist:
+        plt.plot(Games[Pdict[name]],label=name)
+  plt.legend(loc='upper left',bbox_to_anchor=(1,1))
+  plt.show()
+
+Function Call
+----------------
+myplot(['KobeBryant','LeBronJames','DerrickRose'])
+==============================================
+ Advanced Function Design
+==============================================
+def myplot(playerlist):
+  Col = {'KobeBryant':'Black','LeBronJames':'Red','DerrickRose':'Green'}
+  Mrk = {'KobeBryant':'s','LeBronJames':'o','DerrickRose':'^'}
+  for name in playerlist:
+        plt.plot(Games[Pdict[name]],c=Col[name],label=name,Marker=Mrk[name])
+  plt.legend(loc='upper left',bbox_to_anchor=(1,1))
+  plt.show()
+----------
+myplot(['KobeBryant','LeBronJames','DerrickRose'])
+==================================================
+       $$ Specify full path to File $$
+==================================================
+import pandas as pd
+stats = pd.read_csv('C:\\Users\\Ravishankar.kumar\\Desktop\\Python\\P4-Demographic-Data.csv')
+stats
+================================================
+       $$ Change Working Directory $$
+================================================
+import os
+print(os.getcwd());
+os.chdir('C:\\Users\\Ravishankar.kumar\\Desktop')
+output: C:\Users\Ravishankar.kumar\Desktop\Python Programming Course
+==============================================
+       $$  Data Frame:Display columns $$
+==============================================
+stats.columns
+==============================================
+ $$ Data Frame: Displaying top 5 rows $$
+==============================================
+stats.head()
+->if you want to print 6 top rows
+stats.head(6)
+==============================================
+ $$ Data Frame: Displaying bottom 5 rows $$
+==============================================
+stats.tail()
+
+==============================================
+ $$ Data Frame: Details about columns $$
+==============================================
+stats.info()
+==============================================
+ $$ Data Frame: Describe about data $$
+==============================================
+stats.describe() -> in Column wise
+stats.describe().transpose() -> in Row wise
+==============================================
+ $$ Data Frame: Renaming columns $$
+==============================================
+stats.columns = ['changeName','changeName']
+==============================================
+ $$ Subsetting Dataframe in Rows $$
+==============================================
+stats[3:10:2]
+3-starting index inclusive
+10-last index exclusive
+2-difference
+==============================================
+ $$ Subsetting Dataframe in Columns $$
+==============================================
+stats[4:8][['CountryName','CountryCode']]
+        or
+stats[['CountryName','CountryCode']][4:8]
+==============================================
+ $$ Data Frame: Mathematics Operation $$
+==============================================
+result = stats.BirthRate * stats.Internetusers
+->Add a column
+stats['MyCalc'] = stats.BirthRate * stats.Internetusers
+->Drop a coumn
+stats.drop('MyCalc',1)
+==============================================
+ $$ Data Frame: Filtering $$
+==============================================
+Filter = stats.Internetusers < 2
+stats[Filter]
+Filter1 = stats.Birthrate < 40
+stats[Filter & Filter1]
+->To get a Unique value
+stats.IncomeGroup.unique()
+->To get a Particular condition
+stats[stats.CountryName=='Myanmar']
+=================================================
+ $$ Data Frame: Accessing Individual elements $$
+=================================================
+stats.iat[0,4]
+stats.at[2,'Birthrate']
+=================================================
+ $$ Introduction to Seaborn $$
+=================================================
+Refrence: https://seaborn.pydata.org/examples/index.html
+          https://seaborn.pydata.org/generated/seaborn.lmplot.html
+          https://matplotlib.org/
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+vis1 = sns.distplot(stats['Internetusers'])
+vis1 = sns.distplot(stats['Internetusers'],bins = 30)
+vis2 = sns.boxplot(data= stats,x = 'IncomeGroup', y = 'Birthrate')
+vis3 = sns.lmplot(data = stats, x = 'Internetusers', y = 'Birthrate')
+vis3 = sns.lmplot(data = stats, x = 'Internetusers', y = 'Birthrate',fit_reg= False)
+=================================================
+ $$ Working with JointPlots $$
+=================================================
+movies.columns = ['Film','Genre','CriticRatings','AudienceRatings','BudgetMillions','YearOfRelease']
+j = sns.jointplot(data = movies, x = 'CriticRatings', y = 'AudienceRatings')
+j = sns.jointplot(data = movies, x = 'CriticRatings', y = 'AudienceRatings', kind='hex')
+m1 = plt.hist(movies.AudienceRatings, bins = 15)
+plt.hist(movies.BudgetMillions)
+-----------Combination of three ----------------
+plt.hist(movies[movies.Genre=='Drama'].BudgetMillions)
+plt.hist(movies[movies.Genre=='Thriller'].BudgetMillions)
+#plt.hist(movies[movies.Genre=='Action'].BudgetMillions)
+plt.show()
+             or
+plt.hist([movies[movies.Genre=='Drama'].BudgetMillions,movies[movies.Genre=='Thriller'].BudgetMillions,movies[movies.Genre=='Action'].BudgetMillions])
+plt.show()
+             or
+plt.hist([movies[movies.Genre=='Drama'].BudgetMillions,\
+          movies[movies.Genre=='Thriller'].BudgetMillions,\
+          movies[movies.Genre=='Action'].BudgetMillions])
+plt.show()
+             or
+list1 = list()
+for gen in movies.Genre.cat.categories:
+    list1.append(movies[movies.Genre==gen].BudgetMillions)
+plt.hist(list1)
+============================================
+ && Creating a KDE Plot &&
+============================================
+vis1 = sns.lmplot(data = movies, x ='CriticRatings',y = 'AudienceRatings', fit_reg=False, hue='Genre',size = 5, aspect=1)
+k1 = sns.kdeplot(movies.CriticRatings,movies.AudienceRatings, cmap ="Reds")
+===========================================
+   $$ Violinplots Vs Boxplots $$
+===========================================
+z = sns.violinplot(data = movies, x='Genre',y='CriticRatings')
+w = sns.boxplot(data = movies, x='Genre',y='CriticRatings')
